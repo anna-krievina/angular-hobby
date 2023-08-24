@@ -1,0 +1,13 @@
+#resultField {
+  cursor: default;
+  width: 212px;
+  color: #1a5e69;
+  text-align: right;
+}
+
+.calcButton {
+  height: 50px;
+  width: 50px;
+  background: black;
+  color: white;
+}

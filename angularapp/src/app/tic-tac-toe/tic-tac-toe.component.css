@@ -1,0 +1,26 @@
+#board {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  text-align: center;
+}
+
+#boardTable {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  background: #1a5e69;
+}
+
+.ticCell {
+  border: 1px solid;
+  width: 100px;
+  height: 100px;
+  font-size: 35px;
+  text-align: center;
+}
+
+#resultField {
+  text-align: center;
+  font-size: 20px;
+}
