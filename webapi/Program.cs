@@ -16,8 +16,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Localhost certificates are not accepted by Chrome
-// app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 // app.UseAuthorization();
 
