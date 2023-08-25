@@ -9,10 +9,12 @@ export class SakuraComponent implements AfterViewInit {
   private canvas?: HTMLCanvasElement;
   private ctx?: CanvasRenderingContext2D;
   public bgColor: string = "#2f2f42";
+  public canvasSizeX: number = 450;
+  public canvasSizeY: number = 400;
+  public canvasId: string = "sakuraCanvas" 
   private circleDiameter: number = 20;
   private circle2Diameter: number = 180;
   private expand: boolean = true;
-  public canvasId: string = "sakuraCanvas" 
 
   constructor() {
   }
@@ -60,7 +62,7 @@ export class SakuraComponent implements AfterViewInit {
     }
   }
 
-  // the coordinates were trial and error
+  // the coordinates were chosen with trial and error
   drawSakura(ctx: CanvasRenderingContext2D) {
     ctx.save();
     // left

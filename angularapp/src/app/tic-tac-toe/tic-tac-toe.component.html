@@ -18,6 +18,9 @@
   </table>
   <br />
   <div *ngIf="gameOver">
-    <p id="resultField">Game over!</p>
+    <p id="resultField">
+      Game over!
+      <input class="resetButton" type="button" value="reset" (click)="clearBoard()" />
+    </p>
   </div>
 </div>

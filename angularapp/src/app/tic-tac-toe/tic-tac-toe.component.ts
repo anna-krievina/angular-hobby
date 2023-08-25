@@ -12,13 +12,7 @@ export class TicTacToeComponent {
   public http: HttpClient;
 
   constructor(http: HttpClient) {
-    const BoardSize: number = 9;
-    let idCounter: number = 1;
-
-    for (let i = 0; i < BoardSize; i++) {
-      this.board[i] = new TicTacModel(idCounter);
-      idCounter++;
-    }
+    this.clearBoard();
     this.http = http;
   }
 
@@ -33,14 +27,28 @@ export class TicTacToeComponent {
 
   calculateMoveAndResult() {
     this.http.post<number>('/TicTacToe/api/GetMove', this.board).subscribe(result => {
-      this.board[result].Value = "O";
-      // after both moves are made, need to calculate if winning conditions are met.
-      this.http.post<boolean>('/TicTacToe/api/CalculateGameOver', this.board).subscribe(result => {
-      this.gameOver = result;
-      }, error => console.error(error));
+      if (result == -1) {
+        this.gameOver = true;
+      } else {
+        this.board[result].Value = "O";
+        // after both moves are made, need to calculate if winning conditions are met.
+        this.http.post<boolean>('/TicTacToe/api/CalculateGameOver', this.board).subscribe(result => {
+          this.gameOver = result;
+        }, error => console.error(error));
+      }
     }, error => console.error(error));
   }
 
+  clearBoard() {
+    const BoardSize: number = 9;
+    let idCounter: number = 1;
+
+    for (let i = 0; i < BoardSize; i++) {
+      this.board[i] = new TicTacModel(idCounter);
+      idCounter++;
+    }
+    this.gameOver = false;
+  }
 }
 
 class TicTacModel {

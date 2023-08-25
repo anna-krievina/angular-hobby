@@ -1,10 +1,11 @@
 html {
   position: relative;
   min-height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
-  /* Margin bottom by footer height */
+  margin-top: 100px;
   margin-bottom: 60px;
 }
 
@@ -12,17 +13,17 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
-  /* Set the fixed height of the footer here */
   height: 60px;
-  line-height: 60px; /* Vertically center the text there */
+  line-height: 60px;
   background-color: #f5f5f5;
 }
 
-/* Custom page CSS
--------------------------------------------------- */
-/* Not required for template or sticky footer method. */
+p {
+  font-size: 18px;
+  color:black;
+}
 
-body > .container {
+.main > .container {
   padding: 60px 15px 0px;
 }
 
@@ -31,16 +32,9 @@ body > .container {
   padding-left: 15px;
 }
 
-code {
-  font-size: 80%;
-}
-
-.content {
-  margin-top: 100px;
-  margin-bottom: 60px;
-}
-
 .centerDiv {
+  padding-top: 100px;
+  margin-bottom: 60px;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
@@ -51,4 +45,8 @@ code {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+}
+
+#about {
+    padding-top:100px;
 }

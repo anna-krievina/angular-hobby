@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
 using webapi.Models;
 
 namespace webapi.Controllers
@@ -8,16 +9,9 @@ namespace webapi.Controllers
     public class CalculatorController : Controller
     {
         public const string Add = "+";
-        public const string Subtract = "-";
+        public const string Subtract = "–";
         public const string Multipy = "*";
         public const string Divide = "÷";
-        public const string Undo = "⌫";
-        public const string Reset = "C";
-        public const string Result = "=";
-        public const string Negate = "+/-";
-
-        public string[] Operation = { Add, Subtract, Multipy, Divide };
-        public string[] Action = { Undo, Reset, Result };
 
         [HttpPost]
         [Route("api/Calculate")]
@@ -29,9 +23,9 @@ namespace webapi.Controllers
             {
                 try
                 {
-                    int firstNumber = int.Parse(resultArray[0]);
-                    int secondNumber = int.Parse(resultArray[2]);
-                    int resultNumber = 0;
+                    decimal firstNumber = decimal.Parse(resultArray[0], CultureInfo.InvariantCulture);
+                    decimal secondNumber = decimal.Parse(resultArray[2], CultureInfo.InvariantCulture);
+                    decimal resultNumber = 0;
                     switch (resultArray[1])
                     {
                         case Add:
@@ -47,11 +41,12 @@ namespace webapi.Controllers
                             resultNumber = firstNumber * secondNumber;
                             break;
                     }
-                    result = resultNumber.ToString();
+                    result = resultNumber.ToString(CultureInfo.InvariantCulture);
                 }
                 catch (Exception e)
                 {
                     // in case of error, just return the result
+                    Console.WriteLine(e.Message);
                 }
             }
             return result;
@@ -65,8 +60,8 @@ namespace webapi.Controllers
             string[] resultArray = result.Split(' ');
             if (resultArray.Length > 0)
             {
-                int firstNumber = int.Parse(resultArray[0]);
-                int resultNumber = 0 - firstNumber;
+                decimal firstNumber = decimal.Parse(resultArray[0], CultureInfo.InvariantCulture);
+                decimal resultNumber = 0 - firstNumber;
                 result = resultNumber.ToString();
             }
             return result;

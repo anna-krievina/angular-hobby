@@ -9,7 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class CalculatorComponent {
   public http: HttpClient;
   public add: string = "+";
-  public subtract: string = "-";
+  public subtract: string = "–";
   public multipy: string = "*";
   public divide: string = "÷";
   public undo: string = "⌫";
@@ -17,6 +17,7 @@ export class CalculatorComponent {
   public equals: string = "=";
   public negate: string = "+/-";
   public result: string = "0";
+  public comma: string = ".";
 
   constructor(http: HttpClient) {
     this.http = http;
@@ -45,17 +46,19 @@ export class CalculatorComponent {
         case this.subtract:
         case this.multipy:
         case this.divide:
-          let calculations = ["+", "-", "*", "÷"];
-          let index = -1;
-          for (let i = 0; i < calculations.length; i++) {
-            index = this.result.indexOf(calculations[i]);
-            if (index > -1) {
-              this.result = this.result.replace(calculations[i], buttonValue);
-              break;
+          if (!this.result.endsWith(this.comma)) {
+            let calculations = [this.add, this.subtract, this.multipy, this.divide];
+            let index = -1;
+            for (let i = 0; i < calculations.length; i++) {
+              index = this.result.indexOf(calculations[i]);
+              if (index > -1) {
+                this.result = this.result.replace(calculations[i], buttonValue);
+                break;
+              }
             }
-          }
-          if (index == -1) {
-            this.result = this.result + " " + buttonValue + " ";
+            if (index == -1) {
+              this.result = this.result + " " + buttonValue + " ";
+            }
           }
           break;
         case this.undo:
@@ -64,6 +67,11 @@ export class CalculatorComponent {
           break;
         case this.reset:
           this.result = "0";
+          break;
+        case this.comma:
+          if (!this.result.endsWith(this.comma)) {
+            this.result = this.result + buttonValue
+          }
           break;
         // all the numbers
         default:

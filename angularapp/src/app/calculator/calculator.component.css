@@ -1,6 +1,6 @@
-#resultField {
+#calcResultField {
   cursor: default;
-  width: 212px;
+  width: 200px;
   color: #1a5e69;
   text-align: right;
 }

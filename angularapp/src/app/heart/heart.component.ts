@@ -8,10 +8,11 @@ export class HeartComponent implements AfterViewInit {
 
   private canvas?: HTMLCanvasElement;
   private ctx?: CanvasRenderingContext2D;
-  public bgColor: string = "#F9F8FD";
+  public bgColor: string = "black";
+  public canvasSizeX: number = 450;
+  public canvasSizeY: number = 300;
   public canvasId: string = "heartCanvas"
   private colorArray: string[] = ["blue", "blue_gray", "dark_teal", "gold", "light_gray", "pink", "purple"];
-  private imageSize: number = 25;
 
   constructor() {
   }

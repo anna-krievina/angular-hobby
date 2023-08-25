@@ -8,12 +8,13 @@ export class SnakeComponent implements AfterViewInit {
   private canvas?: HTMLCanvasElement;
   private ctx?: CanvasRenderingContext2D;
   public bgColor: string = "black";
+  public canvasSizeX: number = 450;
+  public canvasSizeY: number = 450;
   public canvasId: string = "snakeCanvas" 
   private snakeArray: CanvasPart[] = [];
   private pixelSize: number = 13;
   private snakeColor: string = "#34aeeb";
   private snakeArrayLength: number = 4;
-  private canvasSize: number = 450;
   private dot?: CanvasPart;
 
   constructor() {
@@ -35,14 +36,14 @@ export class SnakeComponent implements AfterViewInit {
   }
 
   generateDot(ctx: CanvasRenderingContext2D) {
-    var x = (Math.random() * this.canvasSize) + 1;
-    var y = (Math.random() * this.canvasSize) + 1;
+    var x = (Math.random() * this.canvasSizeX) + 1;
+    var y = (Math.random() * this.canvasSizeY) + 1;
     // check for this.snakeArray collision
     while (true) {
       var result = this.snakeArray.find(e => (x >= e.x && x <= e.x + this.pixelSize) || (y >= e.y && y <= e.y + this.pixelSize));
-      if (typeof result !== 'undefined') {
-        x = (Math.random() * this.canvasSize) + 1;
-        y = (Math.random() * this.canvasSize) + 1;
+      if (result) {
+        x = (Math.random() * this.canvasSizeX) + 1;
+        y = (Math.random() * this.canvasSizeY) + 1;
       } else {
         break;
       }
@@ -57,11 +58,11 @@ export class SnakeComponent implements AfterViewInit {
       y += remainderY;
     }
     // subtracting height and width so it doesn't go out of bounds
-    if (x > this.canvasSize - this.pixelSize) {
-      x = this.canvasSize - this.pixelSize;
+    if (x > this.canvasSizeX - this.pixelSize) {
+      x = this.canvasSizeX - this.pixelSize;
     }
-    if (y > this.canvasSize - this.pixelSize) {
-      y = this.canvasSize - this.pixelSize;
+    if (y > this.canvasSizeY - this.pixelSize) {
+      y = this.canvasSizeY - this.pixelSize;
     }
     if (!this.dot) {
       this.dot = new CanvasPart(this.pixelSize, this.pixelSize, "white", x, y, ctx);
